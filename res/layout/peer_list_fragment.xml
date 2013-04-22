@@ -17,7 +17,8 @@
 		    android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/peer_list_item_size"
-            android:background="#555555"  >
+            android:background="#555555"
+            android:visibility="gone"  >
 		    <TextView 
 		        android:id="@+id/first_peer"
 		        android:layout_width="0dip"

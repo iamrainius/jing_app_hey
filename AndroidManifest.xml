@@ -18,7 +18,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light" >
+        
         <activity
             android:name="jing.app.hey.HeyActivity"
             android:label="@string/app_name"
@@ -29,7 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity 
+            android:name="jing.app.hey.BucketDetailActivity" />
+        
         <service android:name="jing.app.hey.service.SocketService" />
+        
         <receiver
             android:name=".service.HeyBroadcastReceiver"
             android:enabled="true">
@@ -38,6 +44,7 @@
                     android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        
     </application>
 
 </manifest>

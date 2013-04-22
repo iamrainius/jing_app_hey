@@ -1,13 +1,12 @@
 package jing.app.hey.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import jing.app.hey.utils.Utils;
 import android.app.Service;
@@ -25,7 +24,6 @@ public class SocketService extends Service implements Runnable{
 	private static SocketService INSTANCE = null;
 	private static Thread sServiceThread = null;
 	private static ServerSocket sServerSocket = null;
-	private static ExecutorService sExecutorService = null;
 	
 	public final static int PORT = 8765;
 	
@@ -75,7 +73,6 @@ public class SocketService extends Service implements Runnable{
 			Log.d(TAG, sServiceThread == null ? "Starting thread..." : "Restarting thread...");
 			sServiceThread = new Thread(this, "SocketService");
             INSTANCE  = this;
-            sExecutorService = Executors.newCachedThreadPool();
             try {
 				sServerSocket = new ServerSocket(PORT);
 			} catch (IOException e) {
@@ -134,10 +131,14 @@ public class SocketService extends Service implements Runnable{
 			try {
 				Socket socket = sServerSocket.accept();
 				InputStream is = socket.getInputStream();
-				int result = -1;
+				String result = "no result";
 				if (is != null) {
-					result = is.read();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+					result = reader.readLine();
+					reader.close();
+					is.close();
 				}
+				
 				Log.d(TAG, "Read: " + result);
 				
 			} catch (IOException e) {

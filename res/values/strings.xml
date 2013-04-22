@@ -6,5 +6,6 @@
     <string name="menu_settings">Settings</string>
     
     <string name="bucket_cover_description">The cover picture of a bucket.</string>
+    <string name="menu_send">Send</string>
 
 </resources>

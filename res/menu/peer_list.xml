@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_send"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Send"
+        android:icon="@drawable/ic_menu_send_normal_holo_light"/>
+
+</menu>
