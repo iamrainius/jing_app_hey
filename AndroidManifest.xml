@@ -7,7 +7,13 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="16" />
-
+	<uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission 
+        android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission 
+        android:name="android.permission.INTERNET"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,6 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="jing.app.hey.service.SocketService" />
+        <receiver
+            android:name=".service.HeyBroadcastReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

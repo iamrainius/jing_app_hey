@@ -1,11 +1,13 @@
 package jing.app.hey;
 
+import jing.app.hey.service.SocketService;
 import jing.app.hey.ui.BucketDetailFragment;
 import jing.app.hey.ui.BucketListFragment;
 import jing.app.hey.ui.PeerListFragment;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -26,7 +28,19 @@ public class HeyActivity extends Activity
 		mBucketListFragment = new BucketListFragment();
 		ft.add(R.id.fragment_container, mBucketListFragment);
 		ft.commit();
+		
+		Intent i = new Intent(getApplicationContext(), SocketService.class);
+		startService(i);
 	}
+	
+	
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
