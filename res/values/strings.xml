@@ -19,5 +19,9 @@
     <string name="peer_host_pref_default">0.0.0.0</string>
     
     <string name="my_host_pref_title">My IP address</string>
+    <string name="context_menu_title">Select your operation</string>
+
+    <string name="my_photos">MY PHOTOS</string>
+    <string name="received_photos">RECEIVED</string>
 
 </resources>

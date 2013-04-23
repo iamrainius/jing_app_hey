@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">快传</string>
+    <string name="menu_settings">设置</string>
+    
+    <string name="menu_send">发送</string>
+    <string name="send_successfully">图片已发送。</string>
+    <string name="recv_complete">接收完毕。</string>
+    <string name="notification_title">发送图片</string>
+    <string name="notification_recv_title">接收图片</string>
+    <string name="send_in_progress">正在发送</string>
+    <string name="recv_in_progress">正在接收</string>
+
+    <string name="peer_host_pref_title">同伴主机</string>
+    <string name="peer_host_pref_summary">你同伴的IP地址</string>
+    <string name="peer_host_pref_default">0.0.0.0</string>
+    
+    <string name="my_host_pref_title">我的IP地址</string>
+    <string name="context_menu_title">请选择你的操作</string>
+    
+    <string name="my_photos">本地图片</string>
+    <string name="received_photos">收到的图片</string>
+
+</resources>

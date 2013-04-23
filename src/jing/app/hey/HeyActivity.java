@@ -29,13 +29,13 @@ public class HeyActivity extends Activity
         actionBar.setDisplayShowTitleEnabled(true);
 
         Tab tab = actionBar.newTab()
-                .setText("My photos")
+                .setText(R.string.my_photos)
                 .setTabListener(new TabListener<BucketListFragment>(
                         this, "bucket-list", BucketListFragment.class));
         actionBar.addTab(tab);
         
         tab = actionBar.newTab()
-                .setText("Received photos")
+                .setText(R.string.received_photos)
                 .setTabListener(new TabListener<ReceivedListFragment>(
                         this, "received-list", ReceivedListFragment.class));
         actionBar.addTab(tab);
@@ -49,11 +49,8 @@ public class HeyActivity extends Activity
         super.onDestroy();
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.hey_activity, menu);
         return true;
     }

@@ -3,7 +3,9 @@ package jing.app.bitmap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.util.concurrent.Executor;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -51,7 +53,7 @@ public class BitmapLoader {
     }
     
     public Bitmap get(String key) {
-        return mMemoryCache.get(key);
+        return null;//mMemoryCache.get(key);
     }
     
     public void loadBitmapFromUri(String uriString, ImageView view, boolean square) {
@@ -66,7 +68,7 @@ public class BitmapLoader {
                 final AsyncDrawable asyncDrawable =
                         new AsyncDrawable(mContext.getResources(), null, task);
                 view.setImageDrawable(asyncDrawable);
-                task.execute(Uri.parse("file://" + uriString));
+                task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, uriString);
             }
         }
         
@@ -76,8 +78,8 @@ public class BitmapLoader {
         final LoadBitmapTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
         if (bitmapWorkerTask != null) {
-            final Uri bitmapData = bitmapWorkerTask.mUri;
-            if (bitmapData != null && !bitmapData.toString().equalsIgnoreCase(uriString)) {
+            final String bitmapData = bitmapWorkerTask.mUri;
+            if (bitmapData != null && !bitmapData.equalsIgnoreCase(uriString)) {
                 // Cancel previous task
                 bitmapWorkerTask.cancel(true);
             } else {
@@ -115,7 +117,7 @@ public class BitmapLoader {
         }
     }
     
-    private class LoadBitmapTask extends AsyncTask<Uri, Void, Void> {
+    private class LoadBitmapTask extends AsyncTask<String, Void, Void> {
         private ImageView mImageView;
         private final WeakReference<ImageView> mImageViewReference;
         private int mWidth;
@@ -123,18 +125,25 @@ public class BitmapLoader {
         private String mType;
         private Bitmap mBitmap;
         private Context mContext;
-        Uri mUri;
+        private Activity mActivity;
+        String mUri;
         private boolean mSquare;
         
         public LoadBitmapTask(Context context, ImageView view, boolean square) {
             mContext = context;
+            mActivity = (Activity) context;
             mImageView = view;
             mSquare = square;
             mImageViewReference = new WeakReference<ImageView>(mImageView);
         }
         
         @Override
-        protected Void doInBackground(Uri... uris) {
+        protected Void doInBackground(String... paths) {
+//        	try {
+//				Thread.sleep(500);
+//			} catch (InterruptedException e1) {
+//			}
+        	
             if (mImageView != null) {
                 mWidth = mImageView.getWidth();
                 if (mSquare) {
@@ -144,8 +153,8 @@ public class BitmapLoader {
                 }
                 
                 try {
-                    mBitmap = decodeSampledBitmapFromUri(uris[0], mWidth, mHeight);
-                    mUri = uris[0];
+                    mBitmap = decodeSampledBitmapFromUri(paths[0], mWidth, mHeight);
+                    mUri = paths[0];
                 } catch (IOException e) {
                 }
             }
@@ -166,7 +175,7 @@ public class BitmapLoader {
                 
                 if (this == bitmapWorkerTask && imageView != null) {
                     imageView.setImageBitmap(mBitmap);
-                    BitmapLoader.getInstance(mContext).add(mUri.toString(), mBitmap);
+                    //BitmapLoader.getInstance(mContext).add(mUri.toString(), mBitmap);
                 }
                 
             }
@@ -194,19 +203,17 @@ public class BitmapLoader {
             return inSampleSize;
         }
         
-        private Bitmap decodeSampledBitmapFromUri(Uri uri,
+        private Bitmap decodeSampledBitmapFromUri(String path,
                 int reqWidth, int reqHeight) throws IOException {
                 // First decode with inJustDecodeBounds=true to check dimensions
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
-            InputStream is = mContext.getContentResolver().openInputStream(uri);
-            BitmapFactory.decodeStream(is, null, options);
+            BitmapFactory.decodeFile(path, options);
                 // Calculate inSampleSize
             options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
                 // Decode bitmap with inSampleSize set
             options.inJustDecodeBounds = false;
-            is = mContext.getContentResolver().openInputStream(uri);
-            return BitmapFactory.decodeStream(is, null, options);
+            return BitmapFactory.decodeFile(path, options);
         }
 
     }
