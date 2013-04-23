@@ -7,13 +7,13 @@ import android.util.Log;
 
 public class HeyBroadcastReceiver extends BroadcastReceiver {
 
-	private static final String TAG = "HeyBroadcastReceiver";
+    private static final String TAG = "HeyBroadcastReceiver";
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		Log.d(TAG, "The system is booted");
-		Intent i = new Intent(context, SocketService.class);
-		context.startService(i);
-	}
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "The system is booted");
+        Intent i = new Intent(context, SocketService.class);
+        context.startService(i);
+    }
 
 }

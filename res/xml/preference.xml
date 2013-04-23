@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference 
+        android:key="my-host"
+        android:title="@string/my_host_pref_title" />
+    
+    <EditTextPreference 
+        android:key="peer-host"
+        android:title="@string/peer_host_pref_title"
+        android:summary="@string/peer_host_pref_summary"
+        android:defaultValue="@string/peer_host_pref_default" />
+</PreferenceScreen>

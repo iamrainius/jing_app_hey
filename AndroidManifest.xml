@@ -11,6 +11,8 @@
         android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission 
         android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission
+        android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission 
         android:name="android.permission.INTERNET"/>
     
@@ -32,7 +34,12 @@
         </activity>
         
         <activity 
-            android:name="jing.app.hey.BucketDetailActivity" />
+            android:name="jing.app.hey.BucketDetailActivity"
+            android:screenOrientation="portrait" />
+        
+        <activity 
+            android:name="jing.app.hey.SettingsActivity"
+            android:screenOrientation="portrait" />
         
         <service android:name="jing.app.hey.service.SocketService" />
         
@@ -44,6 +51,11 @@
                     android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        
+        <provider
+            android:name=".provider.HeyProvider"
+            android:authorities="jing.app.hey.provider"
+            android:label="@string/app_name" />
         
     </application>
 

@@ -7,5 +7,17 @@
     
     <string name="bucket_cover_description">The cover picture of a bucket.</string>
     <string name="menu_send">Send</string>
+    <string name="send_successfully">The photo is sent.</string>
+    <string name="recv_complete">Receive complete.</string>
+    <string name="notification_title">Send photo</string>
+    <string name="notification_recv_title">Receive photo</string>
+    <string name="send_in_progress">Send in progress</string>
+    <string name="recv_in_progress">Receive in progress</string>
+
+    <string name="peer_host_pref_title">Peer host</string>
+    <string name="peer_host_pref_summary">The IP address of your peer</string>
+    <string name="peer_host_pref_default">0.0.0.0</string>
+    
+    <string name="my_host_pref_title">My IP address</string>
 
 </resources>
