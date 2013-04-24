@@ -33,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class PeerListFragment extends Fragment {
@@ -47,18 +48,22 @@ public class PeerListFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         
         if (!TextUtils.isEmpty(mUriString)) {
-            BitmapLoader.getInstance(getActivity()).loadBitmapFromUri(mUriString, mImageView, false);
+            int w = mLayout.getWidth();
+            int h = mLayout.getHeight();
+            BitmapLoader.getInstance(getActivity()).loadBitmapFromUri(mUriString, mImageView, w, h, false);
         }
     }
-    
+
+    RelativeLayout mLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.peer_list_fragment, container, false);
+        mLayout = (RelativeLayout) view.findViewById(R.id.peer_list_layout);
         mImageView = (ImageView) view.findViewById(R.id.selected_image);
         return view;
     }

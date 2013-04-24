@@ -14,12 +14,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
 
 public class BitmapLoader {
     private static final int MAX_MEMORY = (int) (Runtime.getRuntime().maxMemory() / 1024);
     private static final int MEMORY_CACHE_SIZE = MAX_MEMORY / 8;
+	public static final String TAG = "BitmapLoader";
     
     private LruCache<String, Bitmap> mMemoryCache;
     private Context mContext;
@@ -56,25 +58,25 @@ public class BitmapLoader {
         return null;//mMemoryCache.get(key);
     }
     
-    public void loadBitmapFromUri(String uriString, ImageView view, boolean square) {
+    public void loadBitmapFromUri(String uriString, ImageView view, int width, int height, boolean square) {
         final String key = uriString;
         
         final Bitmap bitmap = get(key);
         if (bitmap != null) {
             view.setImageBitmap(bitmap);
         } else {
-            if (cancelPotentialWork(uriString, view, square)) {
-                final LoadBitmapTask task = new LoadBitmapTask(mContext, view, square);
+            if (cancelPotentialWork(uriString, view)) {
+                final LoadBitmapTask task = new LoadBitmapTask(mContext, view, width, height, square);
                 final AsyncDrawable asyncDrawable =
                         new AsyncDrawable(mContext.getResources(), null, task);
                 view.setImageDrawable(asyncDrawable);
-                task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, uriString);
+                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, uriString);
             }
         }
         
     }
     
-    private boolean cancelPotentialWork(String uriString, ImageView imageView, boolean square) {
+    private boolean cancelPotentialWork(String uriString, ImageView imageView) {
         final LoadBitmapTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
         if (bitmapWorkerTask != null) {
@@ -122,34 +124,26 @@ public class BitmapLoader {
         private final WeakReference<ImageView> mImageViewReference;
         private int mWidth;
         private int mHeight;
-        private String mType;
         private Bitmap mBitmap;
-        private Context mContext;
-        private Activity mActivity;
         String mUri;
         private boolean mSquare;
         
-        public LoadBitmapTask(Context context, ImageView view, boolean square) {
+        public LoadBitmapTask(Context context, ImageView view,int width,int height, boolean square) {
             mContext = context;
-            mActivity = (Activity) context;
             mImageView = view;
             mSquare = square;
             mImageViewReference = new WeakReference<ImageView>(mImageView);
+            mWidth = width;
+            mHeight = height;
         }
         
         @Override
         protected Void doInBackground(String... paths) {
-//        	try {
-//				Thread.sleep(500);
-//			} catch (InterruptedException e1) {
-//			}
-        	
+            
             if (mImageView != null) {
-                mWidth = mImageView.getWidth();
+                
                 if (mSquare) {
-                    mHeight = mWidth;
-                } else {
-                    mHeight = mImageView.getHeight();
+                    mHeight = mWidth = 100;
                 }
                 
                 try {
@@ -187,6 +181,10 @@ public class BitmapLoader {
             final int height = options.outHeight;
             final int width = options.outWidth;
             int inSampleSize = 1;
+            
+            if (reqWidth == 0 || reqHeight == 0) {
+                return inSampleSize;
+            }
         
             if (height > reqHeight || width > reqWidth) {
         
@@ -198,6 +196,8 @@ public class BitmapLoader {
                 // a final image with both dimensions larger than or equal to the
                 // requested height and width.
                 inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+                Log.d(TAG, "reqWidth = " + reqWidth + ", width = " + width);
+                Log.d(TAG, "reqHeight = " + reqHeight + ", height = " + height);
             }
         
             return inSampleSize;
@@ -211,6 +211,7 @@ public class BitmapLoader {
             BitmapFactory.decodeFile(path, options);
                 // Calculate inSampleSize
             options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+            Log.d(TAG, "Option: inSampleSize = " + options.inSampleSize);
                 // Decode bitmap with inSampleSize set
             options.inJustDecodeBounds = false;
             return BitmapFactory.decodeFile(path, options);

@@ -155,7 +155,7 @@ public class BucketListFragment extends ListFragment {
         }
         
         if (mBitmapLoader != null) {
-            mBitmapLoader.loadBitmapFromUri(uriString, coverView, true);
+            mBitmapLoader.loadBitmapFromUri(uriString, coverView, 0, 0, true);
         }
     }
     

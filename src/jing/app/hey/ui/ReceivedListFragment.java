@@ -59,20 +59,20 @@ public class ReceivedListFragment extends ListFragment implements OnItemLongClic
     
     
     @Override
-	public void onResume() {
-    	mLoadReceivedTask = new LoadReceivedTask();
+    public void onResume() {
+        mLoadReceivedTask = new LoadReceivedTask();
         mLoadReceivedTask.execute();
-		super.onResume();
-	}
+        super.onResume();
+    }
     
     @Override
-	public void onPause() {
-    	if (mLoadReceivedTask != null && !mLoadReceivedTask.isCancelled()) {
+    public void onPause() {
+        if (mLoadReceivedTask != null && !mLoadReceivedTask.isCancelled()) {
             mLoadReceivedTask.cancel(true);
         }
-    	
-		super.onPause();
-	}
+        
+        super.onPause();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -175,139 +175,139 @@ public class ReceivedListFragment extends ListFragment implements OnItemLongClic
         }
         
         if (mBitmapLoader != null) {
-            mBitmapLoader.loadBitmapFromUri(uriString, coverView, true);
+            mBitmapLoader.loadBitmapFromUri(uriString, coverView, 0, 0, true);
         }
     }
 
     String mSelectedItem = null;
-	@Override
-	public boolean onItemLongClick(AdapterView<?> parent, View view,
-			int position, long id) {
-		if (mActionMode != null) {
-			return false;
-		}
-		
-		mActionMode = mActivity.startActionMode(mActionModeCallback);
-		mActionMode.setTitle(mActivity.getString(R.string.context_menu_title));
-		view.setSelected(true);
-		BucketListItem item = (BucketListItem) view;
-		mSelectedItem = item.mBucketName;
-		return true;
-	}
-	
-	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-		
-		@Override
-		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-			return false;
-		}
-		
-		@Override
-		public void onDestroyActionMode(ActionMode mode) {
-			mActionMode = null;
-		}
-		
-		@Override
-		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-			MenuInflater inflater = mActivity.getMenuInflater();
-			inflater.inflate(R.menu.context_menu, menu);
-			return true;
-		}
-		
-		@Override
-		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			switch (item.getItemId()) {
-			case R.id.menu_save:
-				doSaveItem();
-				mode.finish();
-				return true;
-			case R.id.menu_del:
-				doDeleteItem();
-				mode.finish();
-				return true;
-			default:
-				return false;
-			}
-			
-		}
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view,
+            int position, long id) {
+        if (mActionMode != null) {
+            return false;
+        }
+        
+        mActionMode = mActivity.startActionMode(mActionModeCallback);
+        mActionMode.setTitle(mActivity.getString(R.string.context_menu_title));
+        view.setSelected(true);
+        BucketListItem item = (BucketListItem) view;
+        mSelectedItem = item.mBucketName;
+        return true;
+    }
+    
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+        
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+        
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mActionMode = null;
+        }
+        
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mActivity.getMenuInflater();
+            inflater.inflate(R.menu.context_menu, menu);
+            return true;
+        }
+        
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+            case R.id.menu_save:
+                doSaveItem();
+                mode.finish();
+                return true;
+            case R.id.menu_del:
+                doDeleteItem();
+                mode.finish();
+                return true;
+            default:
+                return false;
+            }
+            
+        }
 
-		private void doSaveItem() {
-			String uriString = new String(mSelectedItem);
-			mSelectedItem = null;
-			SaveReceivedTask task = new SaveReceivedTask(uriString);
-			task.execute();
-		}
+        private void doSaveItem() {
+            String uriString = new String(mSelectedItem);
+            mSelectedItem = null;
+            SaveReceivedTask task = new SaveReceivedTask(uriString);
+            task.execute();
+        }
 
-		private void doDeleteItem() {
-			String uriString = new String(mSelectedItem);
-			mSelectedItem = null;
-			DeleteReceivedTask task = new DeleteReceivedTask(uriString);
-			task.execute();
-		}
-	};
-	private class SaveReceivedTask extends AsyncTask<Void, Void, String> {
-		String mUriString;
-		
-		public SaveReceivedTask(String uriString) {
-			mUriString = uriString;
-		}
+        private void doDeleteItem() {
+            String uriString = new String(mSelectedItem);
+            mSelectedItem = null;
+            DeleteReceivedTask task = new DeleteReceivedTask(uriString);
+            task.execute();
+        }
+    };
+    private class SaveReceivedTask extends AsyncTask<Void, Void, String> {
+        String mUriString;
+        
+        public SaveReceivedTask(String uriString) {
+            mUriString = uriString;
+        }
 
-		@Override
-		protected String doInBackground(Void... params) {
-			String url = null;
-			try {
-				url = MediaStore.Images.Media.insertImage(mActivity.getContentResolver(), mUriString, null, "");
-				
-				MediaScannerConnection.scanFile(mActivity, new String[] { url },
-	                    null, null);
-			} catch (FileNotFoundException e) {
-			}
-			
-			return url;
-		}
-		
-		@Override
-		protected void onPostExecute(String result) {
-			if (result != null) {
-				Toast.makeText(mActivity, "Saved to " + result, Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(mActivity, "Failed to save", Toast.LENGTH_SHORT).show();
-			}
-			super.onPostExecute(result);
-		}
-		
-	}
-	
-	private class DeleteReceivedTask extends AsyncTask<Void, Void, Void> {
-		
-		String mUriString;
-		
-		public DeleteReceivedTask(String uriString) {
-			mUriString = uriString;
-		}
+        @Override
+        protected String doInBackground(Void... params) {
+            String url = null;
+            try {
+                url = MediaStore.Images.Media.insertImage(mActivity.getContentResolver(), mUriString, null, "");
+                
+                MediaScannerConnection.scanFile(mActivity, new String[] { url },
+                        null, null);
+            } catch (FileNotFoundException e) {
+            }
+            
+            return url;
+        }
+        
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                Toast.makeText(mActivity, "Saved to " + result, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mActivity, "Failed to save", Toast.LENGTH_SHORT).show();
+            }
+            super.onPostExecute(result);
+        }
+        
+    }
+    
+    private class DeleteReceivedTask extends AsyncTask<Void, Void, Void> {
+        
+        String mUriString;
+        
+        public DeleteReceivedTask(String uriString) {
+            mUriString = uriString;
+        }
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			File file = new File(mUriString);
-			if (file.exists()) {
-				file.delete();
-			}
-			
-			return null;
-		}
+        @Override
+        protected Void doInBackground(Void... params) {
+            File file = new File(mUriString);
+            if (file.exists()) {
+                file.delete();
+            }
+            
+            return null;
+        }
 
-		@Override
-		protected void onPostExecute(Void result) {
-			if (mLoadReceivedTask != null && !mLoadReceivedTask.isCancelled()) {
-	            mLoadReceivedTask.cancel(true);
-	        }
-			
-			mLoadReceivedTask = new LoadReceivedTask();
-			mLoadReceivedTask.execute();
-			
-			super.onPostExecute(result);
-		}
-		
-	}
+        @Override
+        protected void onPostExecute(Void result) {
+            if (mLoadReceivedTask != null && !mLoadReceivedTask.isCancelled()) {
+                mLoadReceivedTask.cancel(true);
+            }
+            
+            mLoadReceivedTask = new LoadReceivedTask();
+            mLoadReceivedTask.execute();
+            
+            super.onPostExecute(result);
+        }
+        
+    }
     
 }
