@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Hey!</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Chuan</string>
     <string name="menu_settings">Settings</string>
     
     <string name="bucket_cover_description">The cover picture of a bucket.</string>
