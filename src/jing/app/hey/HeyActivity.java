@@ -11,7 +11,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,8 +42,12 @@ public class HeyActivity extends Activity
                         this, "received-list", ReceivedListFragment.class));
         actionBar.addTab(tab);
         
-        Intent i = new Intent(getApplicationContext(), SocketService.class);
-        startService(i);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean start = sharedPrefs.getBoolean("start-service", false);
+        if (start) {
+            Intent i = new Intent(getApplicationContext(), SocketService.class);
+            startService(i);
+        }
     }
 
     @Override

@@ -9,4 +9,8 @@
         android:title="@string/peer_host_pref_title"
         android:summary="@string/peer_host_pref_summary"
         android:defaultValue="@string/peer_host_pref_default" />
+    <CheckBoxPreference 
+        android:key="start-service"
+        android:title="@string/start_service_pref_title"
+        android:summary="@string/start_service_pref_summary" />
 </PreferenceScreen>

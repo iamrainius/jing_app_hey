@@ -2,7 +2,7 @@ package jing.app.hey.ui;
 
 import jing.app.bitmap.BitmapLoader;
 import jing.app.hey.R;
-import jing.app.hey.ui.BucketListFragment.Callback;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -37,6 +37,9 @@ public class BucketDetailFragment extends Fragment implements OnItemClickListene
 
     private String mBucketName;
     private Callback mCallback;
+
+	private ActionBar mActionBar;
+    
     
     static final String[] IMAGE_PROJECTION = {
         MediaStore.Images.ImageColumns._ID,
@@ -71,6 +74,10 @@ public class BucketDetailFragment extends Fragment implements OnItemClickListene
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
         
+        mActionBar = mActivity.getActionBar();
+        mActionBar.setTitle(mBucketName);
+        mActionBar.setSubtitle(mActivity.getString(R.string.bucket_detail_sub_title, 0));
+        
         LoaderManager lm = getLoaderManager();
         lm.initLoader(LOADER_ID, null, LOADER_CALLBACKS);
     }
@@ -84,6 +91,7 @@ public class BucketDetailFragment extends Fragment implements OnItemClickListene
         }
     }
     
+
     private final LoaderCallbacks<Cursor> LOADER_CALLBACKS = new LoaderCallbacks<Cursor>() {
         
         @Override
@@ -94,6 +102,10 @@ public class BucketDetailFragment extends Fragment implements OnItemClickListene
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             mAdapter.swapCursor(data);
+            if (mActionBar != null && data != null) {
+                mActionBar.setSubtitle(
+                        mActivity.getString(R.string.bucket_detail_sub_title, data.getCount()));
+            }
         }
         
         @Override

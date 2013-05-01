@@ -3,9 +3,10 @@
 
     <string name="app_name">快传</string>
     <string name="menu_settings">设置</string>
-    
+    <string name="bucket_cover_description">相册封面</string>
     <string name="menu_send">发送</string>
     <string name="send_successfully">图片已发送。</string>
+    <string name="send_failed">图片发送失败。</string>
     <string name="recv_complete">接收完毕。</string>
     <string name="notification_title">发送图片</string>
     <string name="notification_recv_title">接收图片</string>
@@ -16,10 +17,25 @@
     <string name="peer_host_pref_summary">你同伴的IP地址</string>
     <string name="peer_host_pref_default">0.0.0.0</string>
     
+    <string name="start_service_pref_title">启动服务</string>
+    <string name="start_service_pref_summary">启动服务之后可以接收同伴发来的内容。</string>
+    
     <string name="my_host_pref_title">我的IP地址</string>
     <string name="context_menu_title">请选择你的操作</string>
     
     <string name="my_photos">本地图片</string>
     <string name="received_photos">收到的图片</string>
-
+    <string name="bucket_detail_sub_title">共%s张图片</string>
+    
+    <string name="input_peer_ip">请输入你同伴手机的IP地址</string>
+    <string name="ok">确认</string>
+    <string name="skip">跳过</string>
+    
+    <string name="start_service">启动</string>
+    <string name="skip_service">不启动</string>
+    
+    <string name="ip_desc">请输入你同伴的IP地址，以便能够分享内容给他/她。如果选择跳过此步骤，你也可以稍后从应用程序的设置选项中设定之。</string>
+    <string name="service_desc">启动接收服务，你的同伴就可以分享内容给你了。但是，这也将加大你的设备的耗电量。建议你在不需要传输内容的时候关闭接收服务，以提高电池寿命。</string>
+    
+    <string name="your_ip">你自己的IP地址：</string>
 </resources>

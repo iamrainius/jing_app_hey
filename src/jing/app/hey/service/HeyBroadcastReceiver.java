@@ -3,6 +3,8 @@ package jing.app.hey.service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class HeyBroadcastReceiver extends BroadcastReceiver {
@@ -11,9 +13,12 @@ public class HeyBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "The system is booted");
-        Intent i = new Intent(context, SocketService.class);
-        context.startService(i);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean start = sharedPrefs.getBoolean("start-service", false);
+        if (start) {
+            Intent i = new Intent(context, SocketService.class);
+            context.startService(i);
+        }
     }
 
 }

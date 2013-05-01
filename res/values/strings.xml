@@ -7,6 +7,7 @@
     <string name="bucket_cover_description">The cover picture of a bucket.</string>
     <string name="menu_send">Send</string>
     <string name="send_successfully">The photo is sent.</string>
+    <string name="send_failed">The photo is not sent.</string>
     <string name="recv_complete">Receive complete.</string>
     <string name="notification_title">Send photo</string>
     <string name="notification_recv_title">Receive photo</string>
@@ -16,11 +17,24 @@
     <string name="peer_host_pref_title">Peer host</string>
     <string name="peer_host_pref_summary">The IP address of your peer</string>
     <string name="peer_host_pref_default">0.0.0.0</string>
+
+    <string name="start_service_pref_title">Start service</string>
+    <string name="start_service_pref_summary">Enable the device to receive contents from your peer.</string>
     
     <string name="my_host_pref_title">My IP address</string>
     <string name="context_menu_title">Select your operation</string>
 
     <string name="my_photos">MY PHOTOS</string>
     <string name="received_photos">RECEIVED</string>
+    <string name="bucket_detail_sub_title">%s image(s)</string>
+    <string name="input_peer_ip">Your peer\'s IP address</string>
+    <string name="ok">OK</string>
+    <string name="skip">Skip</string>
+    <string name="start_service">Start</string>
+    <string name="skip_service">Skip</string>
+    <string name="ip_desc">Please input your peer\'s IP address to share content to him/her. If your skip current step, you could also set the IP address from the \"Settings\" in the application.</string>
+    <string name="service_desc">Turn on the receiving service would enable your device to receive contents transmitted from your peer. However, the continuing of the service will also consume more power. It\'s recommended for you to turn off the service if not necessary.</string>
+    
+    <string name="your_ip">You IP address: </string>
 
 </resources>

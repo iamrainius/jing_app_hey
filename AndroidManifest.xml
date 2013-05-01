@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
+        android:minSdkVersion="13"
+        android:targetSdkVersion="17" />
 	<uses-permission
         android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission 
@@ -25,16 +25,21 @@
         android:theme="@android:style/Theme.Holo.Light" >
         
         <activity
-            android:name="jing.app.hey.HeyActivity"
+            android:name="jing.app.hey.Welcome"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+        <activity
+            android:name="jing.app.hey.HeyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity 
+            android:name="jing.app.hey.KuaiChuanSetupActivity"
+            android:screenOrientation="portrait" />
         <activity 
             android:name="jing.app.hey.BucketDetailActivity"
             android:screenOrientation="portrait" />

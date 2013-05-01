@@ -1,0 +1,145 @@
+android.support.v4.app.BackStackState
+android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.Fragment$SavedState
+android.support.v4.app.Fragment$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentManagerState
+android.support.v4.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentState
+android.support.v4.app.FragmentState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentTabHost: void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener)
+android.support.v4.app.FragmentTabHost$SavedState
+android.support.v4.app.FragmentTabHost$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status[] values()
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status valueOf(java.lang.String)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColor(int)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColorResource(int)
+android.support.v4.view.PagerTabStrip: int getTabIndicatorColor()
+android.support.v4.view.PagerTabStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.PagerTabStrip: void setBackgroundColor(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundResource(int)
+android.support.v4.view.PagerTabStrip: void setDrawFullUnderline(boolean)
+android.support.v4.view.PagerTabStrip: boolean getDrawFullUnderline()
+android.support.v4.view.PagerTabStrip: int getMinHeight()
+android.support.v4.view.PagerTitleStrip: void setSingleLineAllCaps(android.widget.TextView)
+android.support.v4.view.PagerTitleStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTitleStrip: int getTextSpacing()
+android.support.v4.view.PagerTitleStrip: void setNonPrimaryAlpha(float)
+android.support.v4.view.PagerTitleStrip: void setTextColor(int)
+android.support.v4.view.PagerTitleStrip: void setGravity(int)
+android.support.v4.view.PagerTitleStrip: int getMinHeight()
+android.support.v4.view.ViewPager: void setScrollState(int)
+android.support.v4.view.ViewPager: void setAdapter(android.support.v4.view.PagerAdapter)
+android.support.v4.view.ViewPager: android.support.v4.view.PagerAdapter getAdapter()
+android.support.v4.view.ViewPager: void setOnAdapterChangeListener(android.support.v4.view.ViewPager$OnAdapterChangeListener)
+android.support.v4.view.ViewPager: void setCurrentItem(int)
+android.support.v4.view.ViewPager: int getCurrentItem()
+android.support.v4.view.ViewPager: void setOnPageChangeListener(android.support.v4.view.ViewPager$OnPageChangeListener)
+android.support.v4.view.ViewPager: void setChildrenDrawingOrderEnabledCompat(boolean)
+android.support.v4.view.ViewPager: int getOffscreenPageLimit()
+android.support.v4.view.ViewPager: void setOffscreenPageLimit(int)
+android.support.v4.view.ViewPager: void setPageMargin(int)
+android.support.v4.view.ViewPager: int getPageMargin()
+android.support.v4.view.ViewPager: void setPageMarginDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.ViewPager: void setPageMarginDrawable(int)
+android.support.v4.view.ViewPager: void setScrollingCacheEnabled(boolean)
+android.support.v4.view.ViewPager$SavedState
+android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+jing.app.hey.BucketDetailActivity
+jing.app.hey.BucketDetailActivity: BucketDetailActivity()
+jing.app.hey.HeyActivity
+jing.app.hey.HeyActivity: HeyActivity()
+jing.app.hey.KuaiChuanSetupActivity
+jing.app.hey.KuaiChuanSetupActivity: KuaiChuanSetupActivity()
+jing.app.hey.R$dimen: int bucket_list_item_height
+jing.app.hey.R$dimen: int bucket_list_item_image_size
+jing.app.hey.R$dimen: int peer_list_item_size
+jing.app.hey.R$drawable: int ic_launcher
+jing.app.hey.R$drawable: int ic_launcher_2
+jing.app.hey.R$drawable: int ic_menu_del
+jing.app.hey.R$drawable: int ic_menu_save
+jing.app.hey.R$drawable: int ic_menu_send_normal_holo_light
+jing.app.hey.R$drawable: int ic_transmit
+jing.app.hey.R$id: int btn_ok
+jing.app.hey.R$id: int btn_skip
+jing.app.hey.R$id: int btn_skip_service
+jing.app.hey.R$id: int btn_start_service
+jing.app.hey.R$id: int bucket_name
+jing.app.hey.R$id: int count
+jing.app.hey.R$id: int cover
+jing.app.hey.R$id: int edit_ip
+jing.app.hey.R$id: int fragment_container
+jing.app.hey.R$id: int image_grid
+jing.app.hey.R$id: int image_item
+jing.app.hey.R$id: int ip_desc
+jing.app.hey.R$id: int menu_del
+jing.app.hey.R$id: int menu_save
+jing.app.hey.R$id: int menu_send
+jing.app.hey.R$id: int menu_settings
+jing.app.hey.R$id: int peer_list_layout
+jing.app.hey.R$id: int selected_image
+jing.app.hey.R$id: int setup_fragment_container
+jing.app.hey.R$id: int show_your_ip
+jing.app.hey.R$layout: int bucket_detail_fragment
+jing.app.hey.R$layout: int bucket_list_fragment
+jing.app.hey.R$layout: int bucket_list_item
+jing.app.hey.R$layout: int hey_activity
+jing.app.hey.R$layout: int image_grid_item
+jing.app.hey.R$layout: int kuai_chuan_setup_activity
+jing.app.hey.R$layout: int peer_ip_setup_fragment
+jing.app.hey.R$layout: int peer_list_fragment
+jing.app.hey.R$layout: int service_setup_fragment
+jing.app.hey.R$layout: int welcome_fragment
+jing.app.hey.R$menu: int context_menu
+jing.app.hey.R$menu: int hey_activity
+jing.app.hey.R$menu: int peer_list
+jing.app.hey.R$string: int app_name
+jing.app.hey.R$string: int bucket_cover_description
+jing.app.hey.R$string: int bucket_detail_sub_title
+jing.app.hey.R$string: int context_menu_title
+jing.app.hey.R$string: int input_peer_ip
+jing.app.hey.R$string: int ip_desc
+jing.app.hey.R$string: int menu_send
+jing.app.hey.R$string: int menu_settings
+jing.app.hey.R$string: int my_host_pref_title
+jing.app.hey.R$string: int my_photos
+jing.app.hey.R$string: int notification_recv_title
+jing.app.hey.R$string: int notification_title
+jing.app.hey.R$string: int ok
+jing.app.hey.R$string: int peer_host_pref_default
+jing.app.hey.R$string: int peer_host_pref_summary
+jing.app.hey.R$string: int peer_host_pref_title
+jing.app.hey.R$string: int received_photos
+jing.app.hey.R$string: int recv_complete
+jing.app.hey.R$string: int recv_in_progress
+jing.app.hey.R$string: int send_failed
+jing.app.hey.R$string: int send_in_progress
+jing.app.hey.R$string: int send_successfully
+jing.app.hey.R$string: int service_desc
+jing.app.hey.R$string: int skip
+jing.app.hey.R$string: int skip_service
+jing.app.hey.R$string: int start_service
+jing.app.hey.R$string: int start_service_pref_summary
+jing.app.hey.R$string: int start_service_pref_title
+jing.app.hey.R$string: int your_ip
+jing.app.hey.R$style: int AppBaseTheme
+jing.app.hey.R$style: int AppTheme
+jing.app.hey.R$xml: int preference
+jing.app.hey.SettingsActivity
+jing.app.hey.SettingsActivity: SettingsActivity()
+jing.app.hey.Welcome
+jing.app.hey.Welcome: Welcome()
+jing.app.hey.provider.HeyProvider
+jing.app.hey.provider.HeyProvider: HeyProvider()
+jing.app.hey.service.HeyBroadcastReceiver
+jing.app.hey.service.HeyBroadcastReceiver: HeyBroadcastReceiver()
+jing.app.hey.service.SocketService
+jing.app.hey.service.SocketService: SocketService()
+jing.app.hey.ui.BucketListItem
+jing.app.hey.ui.BucketListItem: BucketListItem(android.content.Context)
+jing.app.hey.ui.BucketListItem: BucketListItem(android.content.Context,android.util.AttributeSet,int)
+jing.app.hey.ui.BucketListItem: BucketListItem(android.content.Context,android.util.AttributeSet)
+jing.app.hey.ui.ImageGridItem
+jing.app.hey.ui.ImageGridItem: ImageGridItem(android.content.Context)
+jing.app.hey.ui.ImageGridItem: ImageGridItem(android.content.Context,android.util.AttributeSet,int)
+jing.app.hey.ui.ImageGridItem: ImageGridItem(android.content.Context,android.util.AttributeSet)

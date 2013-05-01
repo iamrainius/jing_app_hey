@@ -1,5 +1,6 @@
 package jing.app.hey.ui;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,6 +13,7 @@ import jing.app.hey.SettingsActivity;
 
 import org.apache.commons.io.IOUtils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.NotificationManager;
@@ -42,6 +44,7 @@ public class PeerListFragment extends Fragment {
     private String mUriString;
     
     private ImageView mImageView;
+    private ActionBar mActionBar;
     
     public PeerListFragment(String urlString) {
         mUriString = urlString;
@@ -65,6 +68,13 @@ public class PeerListFragment extends Fragment {
         View view = inflater.inflate(R.layout.peer_list_fragment, container, false);
         mLayout = (RelativeLayout) view.findViewById(R.id.peer_list_layout);
         mImageView = (ImageView) view.findViewById(R.id.selected_image);
+        
+        // Set titile
+        File file = new File(mUriString);
+        String title = file == null ? "" : file.getName();
+        ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setTitle(title);
+        actionBar.setSubtitle(null);
         return view;
     }
     
@@ -148,15 +158,21 @@ public class PeerListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            mBuilder.setContentText(mActivity.getString(R.string.send_successfully))
+            String notifString = null;
+            if (result) {
+                notifString = mActivity.getString(R.string.send_successfully);
+                Toast.makeText(getActivity(), 
+                       R.string.send_successfully, Toast.LENGTH_SHORT).show();
+            } else {
+                notifString = mActivity.getString(R.string.send_failed);
+                Toast.makeText(getActivity(), 
+                        R.string.send_failed, Toast.LENGTH_SHORT).show();
+            }
+            
+            mBuilder.setContentText(notifString)
             // Removes the progress bar
                     .setProgress(0,0,false);
             mNotifyManager.notify(NOTIFICATION_ID, mBuilder.build());
-            
-            if (result) {
-                Toast.makeText(getActivity(), 
-                       R.string.send_successfully, Toast.LENGTH_SHORT).show();
-            }
             super.onPostExecute(result);
         }
     }

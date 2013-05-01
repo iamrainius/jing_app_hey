@@ -160,7 +160,7 @@ public class ReceivedListFragment extends ListFragment implements OnItemLongClic
             TextView timeView = (TextView) item.findViewById(R.id.count);
             
             titleView.setText(title);
-            timeView.setText(String.valueOf(time));
+            timeView.setText("");
             
             item.mBucketName = uriString;
             
